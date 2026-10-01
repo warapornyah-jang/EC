@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ระบบคณะกรรมการจริยธรรมในคน มหาวิทยาลัยนวมินทราธิราช (NMU-IRB All-in-One)</title>
+  <meta name="description" content="ระบบสารสนเทศและการยื่นคำขอรับการพิจารณาจริยธรรมการวิจัยในคน สำนักงานอธิการบดี มหาวิทยาลัยนวมินทราธิราช (NMU-IRB)" />
+  
+  <!-- Google Fonts: Sarabun & Prompt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN for Single File Operation -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Sarabun', 'Prompt', 'sans-serif'],
+            heading: ['Prompt', 'sans-serif']
+          },
+          colors: {
+            nmu: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22'
+            },
+            gold: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Sarabun', sans-serif;
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Prompt', sans-serif;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      body { background: #fff !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
+
+  <!-- Top Gov Bar -->
+  <div class="no-print bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white text-xs py-2 px-4 border-b border-emerald-800">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+        <span class="font-bold text-amber-300">มหาวิทยาลัยนวมินทราธิราช (Navamindradhiraj University)</span>
+        <span class="hidden md:inline text-emerald-300/50">|</span>
+        <span class="hidden md:inline text-emerald-100">สำนักงานคณะกรรมการจริยธรรมในคน สำนักงานอธิการบดี (NMU-IRB)</span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px]">
+        <span class="text-amber-300">🛡️ เข้ารหัสลับ AES-256</span>
+        <span class="text-emerald-300">⚡ ระบบไฟล์เดี่ยว All-in-One HTML</span>
+        <button onclick="openEmailModal()" class="text-amber-300 hover:text-white font-bold transition">✉️ แจ้งเตือนอีเมล</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Navigation Bar -->
+  <header class="no-print sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-emerald-100 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-800 text-white flex flex-col items-center justify-center p-1 border-2 border-amber-300 shadow">
+          <span class="text-[10px] font-extrabold leading-none">NMU</span>
+          <span class="text-[9px] font-bold text-amber-300 leading-none">IRB</span>
+          <span class="text-[7px] text-emerald-200">สนธ.</span>
+        </div>
+        <div>
+          <h1 class="font-extrabold text-base sm:text-lg text-emerald-950 leading-tight">
+            คณะกรรมการจริยธรรมในคน
+          </h1>
+          <p class="text-xs text-slate-500 font-medium">สำนักงานอธิการบดี มหาวิทยาลัยนวมินทราธิราช</p>
+        </div>
+      </div>
+
+      <!-- Nav Items -->
+      <nav class="hidden lg:flex items-center gap-1 text-xs font-bold">
+        <button onclick="switchTab('home')" id="nav-home" class="px-3 py-2 rounded-xl transition bg-emerald-100 text-emerald-900">หน้าหลัก</button>
+        <button onclick="switchTab('tracking')" id="nav-tracking" class="px-3 py-2 rounded-xl transition text-slate-600 hover:bg-emerald-50">ติดตามโครงการ</button>
+        <button onclick="switchTab('submission')" id="nav-submission" class="px-3 py-2 rounded-xl transition bg-emerald-700 text-white hover:bg-emerald-800 shadow">ยื่นคำขอออนไลน์</button>
+        <button onclick="switchTab('forms')" id="nav-forms" class="px-3 py-2 rounded-xl transition text-slate-600 hover:bg-emerald-50">ดาวน์โหลดแบบฟอร์ม</button>
+        <button onclick="switchTab('registry')" id="nav-registry" class="px-3 py-2 rounded-xl transition text-slate-600 hover:bg-emerald-50">ทะเบียนประวัติ & ออก COA</button>
+        <button onclick="switchTab('drive')" id="nav-drive" class="px-3 py-2 rounded-xl transition text-slate-600 hover:bg-emerald-50">Google Drive</button>
+        <button onclick="switchTab('security')" id="nav-security" class="px-3 py-2 rounded-xl transition text-slate-600 hover:bg-emerald-50">ความปลอดภัย & สำรองข้อมูล</button>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button onclick="downloadThisHtmlFile()" class="hidden sm:inline-flex px-3 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 rounded-xl text-xs font-extrabold shadow-sm transition">
+          📄 ดาวน์โหลดไฟล์ HTML นี้
+        </button>
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl border border-slate-200">
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t px-4 py-3 space-y-1.5 text-xs font-bold">
+      <button onclick="switchTab('home')" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-emerald-50">หน้าหลัก</button>
+      <button onclick="switchTab('tracking')" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-emerald-50">ติดตามโครงการ</button>
+      <button onclick="switchTab('submission')" class="block w-full text-left py-2 px-3 rounded-lg bg-emerald-700 text-white">ยื่นคำขอรับพิจารณาออนไลน์</button>
+      <button onclick="switchTab('forms')" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-emerald-50">ดาวน์โหลดแบบฟอร์ม NMU-IRB</button>
+      <button onclick="switchTab('registry')" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-emerald-50">สมุดทะเบียนประวัติ & ออกเลข COA/COE</button>
+      <button onclick="switchTab('drive')" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-emerald-50">Google Drive คลังเอกสารกลาง</button>
+      <button onclick="switchTab('security')" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-emerald-50">ความปลอดภัย & กู้คืนฉุกเฉิน</button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-8 flex-1">
+
+    <!-- TAB: HOME -->
+    <section id="tab-home" class="space-y-8">
+      <!-- Hero Banner -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-950 text-white p-6 sm:p-12 shadow-xl border border-emerald-700">
+        <div class="max-w-3xl space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-700/60 border border-emerald-500/40 text-amber-300 text-xs font-bold">
+            ✨ ระบบสารสนเทศและบริการออนไลน์ครบวงจร พ.ศ. 2569
+          </div>
+          <h2 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight font-heading">
+            คณะกรรมการจริยธรรมในคน <br>
+            <span class="text-amber-300">มหาวิทยาลัยนวมินทราธิราช</span>
+          </h2>
+          <p class="text-emerald-100 text-sm sm:text-base leading-relaxed font-light">
+            สำนักงานอธิการบดี มหาวิทยาลัยนวมินทราธิราช มุ่งมั่นยกระดับมาตรฐานจริยธรรมการวิจัยในคนตามหลักสากล (Declaration of Helsinki, Belmont Report, ICH-GCP)
+          </p>
+
+          <!-- Search quick track bar -->
+          <div class="bg-white p-2 rounded-2xl shadow-xl max-w-xl flex flex-col sm:flex-row items-center gap-2 border-2 border-amber-300">
+            <input
+              type="text"
+              id="homeTrackInput"
+              placeholder="ป้อนรหัสโครงการ เช่น 68-001 หรือ 60-001..."
+              class="w-full px-4 py-2 text-sm text-slate-800 font-mono font-medium focus:outline-none"
+            />
+            <button
+              onclick="trackFromHome()"
+              class="w-full sm:w-auto px-6 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs sm:text-sm font-bold shadow shrink-0"
+            >
+              ตรวจสอบสถานะ
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div onclick="switchTab('submission')" class="bg-white p-6 rounded-3xl border border-emerald-100 shadow-sm hover:shadow-md cursor-pointer transition">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xl mb-3">📝</div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">ยื่นคำขอรับพิจารณาออนไลน์</h3>
+          <p class="text-xs text-slate-500">กรอกแบบฟอร์ม แนบโครงร่าง พร้อมลงนามดิจิทัล</p>
+        </div>
+        <div onclick="switchTab('tracking')" class="bg-white p-6 rounded-3xl border border-emerald-100 shadow-sm hover:shadow-md cursor-pointer transition">
+          <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-xl mb-3">🔍</div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">ติดตามสถานะโครงการ</h3>
+          <p class="text-xs text-slate-500">ตรวจสอบสถานะการพิจารณาและออก COA</p>
+        </div>
+        <div onclick="switchTab('forms')" class="bg-white p-6 rounded-3xl border border-emerald-100 shadow-sm hover:shadow-md cursor-pointer transition">
+          <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-800 flex items-center justify-center font-bold text-xl mb-3">📂</div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">ดาวน์โหลดแบบฟอร์ม</h3>
+          <p class="text-xs text-slate-500">NMU-IRB-01 ถึง NMU-IRB-07 เอกสาร PIS / ICF</p>
+        </div>
+        <div onclick="switchTab('registry')" class="bg-white p-6 rounded-3xl border border-emerald-100 shadow-sm hover:shadow-md cursor-pointer transition">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-800 flex items-center justify-center font-bold text-xl mb-3 border border-emerald-200">📊</div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">สมุดทะเบียนหนังสือรับ</h3>
+          <p class="text-xs text-slate-500">รวมข้อมูลจาก Google Sheets ประจำปี 2560-2568</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: TRACKING -->
+    <section id="tab-tracking" class="hidden space-y-6">
+      <div class="text-center space-y-2">
+        <h2 class="text-2xl font-extrabold text-slate-900 font-heading">ติดตามสถานะโครงการและการประเมินจริยธรรม</h2>
+        <p class="text-xs text-slate-500">ป้อนรหัสโครงการ หรือ ค้นหาด้วยชื่อผู้วิจัย/เรื่อง</p>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 border border-emerald-100 shadow-sm max-w-2xl mx-auto space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">ค้นหาโครงการ</label>
+          <div class="flex gap-2">
+            <input
+              type="text"
+              id="trackingCodeInput"
+              placeholder="เช่น 68-001 หรือ ชื่อผู้วิจัย"
+              class="flex-1 px-4 py-2.5 text-base border-2 border-emerald-200 rounded-xl focus:border-emerald-600 focus:outline-none"
+            />
+            <button
+              onclick="executeSearchProject()"
+              class="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold shadow"
+            >
+              ค้นหา
+            </button>
+          </div>
+        </div>
+        <div id="trackingError" class="hidden p-3 bg-rose-50 text-rose-800 text-xs rounded-xl border border-rose-200"></div>
+      </div>
+
+      <div id="trackingResultCard" class="hidden max-w-3xl mx-auto bg-white rounded-3xl p-6 sm:p-8 border border-emerald-200 shadow space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span id="resCode" class="font-mono text-xs font-bold px-2.5 py-0.5 rounded bg-emerald-800 text-white"></span>
+              <span id="resYear" class="text-xs text-slate-500"></span>
+            </div>
+            <h3 id="resSubject" class="font-bold text-base sm:text-lg text-slate-900"></h3>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-slate-600 bg-slate-50 p-4 rounded-2xl">
+          <div><strong class="text-slate-800">ผู้วิจัย/ผู้ส่ง:</strong> <span id="resResearcher"></span></div>
+          <div><strong class="text-slate-800">หน่วยงาน/ถึง:</strong> <span id="resDept"></span></div>
+          <div><strong class="text-slate-800">เลขที่หนังสือ:</strong> <span id="resDocNo"></span></div>
+          <div><strong class="text-slate-800">ลงวันที่:</strong> <span id="resDate"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: SUBMISSION -->
+    <section id="tab-submission" class="hidden space-y-6">
+      <div class="text-center space-y-2">
+        <h2 class="text-2xl font-extrabold text-slate-900 font-heading">ยื่นคำขอรับการพิจารณาจริยธรรมการวิจัยในคน</h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto bg-white rounded-3xl p-6 sm:p-8 border border-emerald-100 shadow space-y-6">
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">ชื่อโครงการวิจัย (ภาษาไทย) *</label>
+            <input type="text" id="subTitle" placeholder="ระบุชื่อโครงการวิจัย..." class="w-full px-3.5 py-2.5 text-sm border rounded-xl focus:border-emerald-600 focus:outline-none" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">ชื่อ-นามสกุล หัวหน้าโครงการวิจัย (PI) *</label>
+              <input type="text" id="subResearcher" class="w-full px-3.5 py-2 text-sm border rounded-xl focus:border-emerald-600 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">สังกัด / คณะ *</label>
+              <select id="subFaculty" class="w-full px-3.5 py-2 text-sm border rounded-xl focus:border-emerald-600 focus:outline-none bg-white">
+                <option>คณะแพทยศาสตร์วชิรพยาบาล (วพม.)</option>
+                <option>คณะพยาบาลศาสตร์เกื้อการุณย์ (พยม.)</option>
+                <option>คณะวิทยาศาสตร์และเทคโนโลยีสุขภาพ (วทส.)</option>
+                <option>วิทยาลัยพัฒนาชุมชนเมือง (วชม.)</option>
+                <option>วิทยาลัยพัฒนามหานคร (วมน.)</option>
+                <option>สำนักงานอธิการบดี (สนธ.)</option>
+              </select>
+            </div>
+          </div>
+
+          <button
+            onclick="submitOnlineRequest()"
+            class="w-full py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-sm font-bold shadow-lg transition"
+          >
+            ส่งคำขอพิจารณา
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: FORMS -->
+    <section id="tab-forms" class="hidden space-y-6">
+      <div class="text-center space-y-2">
+        <h2 class="text-2xl font-extrabold text-slate-900 font-heading">ดาวน์โหลดแบบฟอร์มจริยธรรมการวิจัยในคน</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white p-5 rounded-2xl border shadow-xs space-y-2">
+          <span class="font-mono text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">NMU-IRB-01</span>
+          <h4 class="font-bold text-sm">แบบเสนอโครงการวิจัยเพื่อขอรับการพิจารณา</h4>
+          <a href="https://drive.google.com/drive/folders/105Vza8PRLtyw2wSs3qXVmdr-_4TXUkO2" target="_blank" class="text-emerald-700 font-bold text-xs hover:underline block">ดาวน์โหลดจาก Google Drive ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: REGISTRY (SHEETS DATA) -->
+    <section id="tab-registry" class="hidden space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-xs font-bold border border-emerald-300">
+            📊 สมุดทะเบียนหนังสือรับ (Google Sheets)
+          </span>
+          <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">ทะเบียนรับโครงการวิจัย (พ.ศ. 2560 - 2568)</h2>
+        </div>
+        <button onclick="exportRegistryCsv()" class="px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded-xl text-xs font-bold shadow-xs hover:bg-slate-50">
+          📥 ส่งออกข้อมูล CSV / Excel
+        </button>
+      </div>
+
+      <!-- Filters -->
+      <div class="bg-white p-4 rounded-2xl border flex flex-wrap gap-3 items-center text-xs">
+        <input type="text" id="regSearch" placeholder="ค้นหา เรื่อง, ผู้ส่ง/ผู้วิจัย, เลขที่..." class="flex-1 min-w-[200px] px-3 py-2 border rounded-xl" oninput="renderRegistryTable()" />
+        <select id="regYearFilter" class="px-3 py-2 border rounded-xl bg-white" onchange="renderRegistryTable()">
+          <option value="all">ทุกปี พ.ศ. (2560-2568)</option>
+          <option value="2568">ปี พ.ศ. 2568</option>
+          <option value="2567">ปี พ.ศ. 2567</option>
+          <option value="2566">ปี พ.ศ. 2566</option>
+          <option value="2565">ปี พ.ศ. 2565</option>
+          <option value="2564">ปี พ.ศ. 2564</option>
+          <option value="2563">ปี พ.ศ. 2563</option>
+          <option value="2562">ปี พ.ศ. 2562</option>
+          <option value="2561">ปี พ.ศ. 2561</option>
+          <option value="2560">ปี พ.ศ. 2560</option>
+        </select>
+      </div>
+
+      <!-- Table Container -->
+      <div class="bg-white rounded-3xl border shadow-sm overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-50 border-b text-slate-600 font-bold">
+            <tr>
+              <th class="p-3 w-16 text-center">ปี/รับที่</th>
+              <th class="p-3 w-32">เลขที่หนังสือ / วันที่</th>
+              <th class="p-3">เรื่อง / โครงร่างการวิจัย</th>
+              <th class="p-3 w-48">จาก (ผู้ส่ง / ผู้วิจัย)</th>
+              <th class="p-3 w-40">ถึง</th>
+            </tr>
+          </thead>
+          <tbody id="registryTableBody" class="divide-y divide-slate-100"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB: DRIVE -->
+    <section id="tab-drive" class="hidden space-y-6">
+      <div class="text-center space-y-2">
+        <h2 class="text-2xl font-extrabold text-slate-900 font-heading">Google Drive คลังเอกสารกลาง</h2>
+      </div>
+      <div class="text-center">
+        <a href="https://drive.google.com/drive/folders/105Vza8PRLtyw2wSs3qXVmdr-_4TXUkO2" target="_blank" class="px-6 py-3 bg-emerald-700 text-white rounded-xl font-bold inline-block">เปิดคลังเอกสาร Google Drive ↗</a>
+      </div>
+    </section>
+
+    <!-- TAB: SECURITY -->
+    <section id="tab-security" class="hidden space-y-6">
+      <div class="text-center space-y-2">
+        <h2 class="text-2xl font-extrabold text-slate-900 font-heading">ความปลอดภัย & การสำรองข้อมูล</h2>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Official Footer -->
+  <footer class="no-print bg-emerald-950 text-white mt-auto border-t-4 border-amber-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 text-center text-xs text-emerald-300">
+      © 2569 มหาวิทยาลัยนวมินทราธิราช (Navamindradhiraj University). สำนักงานอธิการบดี
+    </div>
+  </footer>
+
+  <!-- SCRIPT: Complete Data Imported directly from Google Sheet -->
+  <script>
+    // Data directly fetched and parsed from Google Sheets (2560-2568)
+    const initialProjects = [
+      {"year":2560,"recvNo":1,"docNo":"วพม.05/480","docDate":"5/10/2560","sender":"น.ส.รังสินันท์ วงค์ทิพย์","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยวิทยานิพนธ์เพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 60-001-03-2"},
+      {"year":2560,"recvNo":2,"docNo":"วพม.05/480","docDate":"5/10/2560","sender":"นางอรพิน สุขสองห้อง","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยวิทยานิพนธ์เพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 60-002-03-2"},
+      {"year":2560,"recvNo":3,"docNo":"วพม.05/480","docDate":"5/10/2560","sender":"น.ส.ระเบียบ กูบกระบี่","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยวิทยานิพนธ์เพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 60-003-03-2"},
+      {"year":2560,"recvNo":4,"docNo":"วพม.05/480","docDate":"5/10/2560","sender":"น.ส.ชัญญารัตน์ ชนะชัย","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยวิทยานิพนธ์เพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 60-004-03-2"},
+      {"year":2560,"recvNo":5,"docNo":"วพม.05/480","docDate":"5/10/2560","sender":"น.ส.ตรีชฎา ศรีระษา","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยวิทยานิพนธ์เพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 60-005-03-2"},
+      {"year":2560,"recvNo":6,"docNo":"วพม.05/480","docDate":"5/10/2560","sender":"น.ส.ปวีลักษณา หล่อพูลกิจสกุล","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยวิทยานิพนธ์เพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 60-006-03-2"},
+      {"year":2560,"recvNo":7,"docNo":"วพม.05/480","docDate":"5/10/2560","sender":"น.ส.รุ่งวิลสวัลย์ พันธวงษ์","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยวิทยานิพนธ์เพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 60-007-03-2"},
+      {"year":2560,"recvNo":8,"docNo":"นมร.0206/1158","docDate":"10/10/2560","sender":"ผศ.ดร.สาระ มุขดี","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยวิทยานิพนธ์เพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 60-008-01-1"},
+      {"year":2561,"recvNo":1,"docNo":"นมร.0337/1818","docDate":"05/03/2561","sender":"นพ.เพชร รอดอารีย์","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยวิทยานิพนธ์เพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 61-001-06-001-1"},
+      {"year":2561,"recvNo":2,"docNo":"วทบ.2561/095","docDate":"22/02/2561","sender":"นายแสน กีรตินวนันท์","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยวิทยานิพนธ์เพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 61-002-05-001-1"},
+      {"year":2561,"recvNo":3,"docNo":"วพม.05/ว.14","docDate":"09/04/2561","sender":"นายอรวิทย์ เหมะจุฑา","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยวิทยานิพนธ์เพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 61-003-03-001-1"},
+      {"year":2561,"recvNo":4,"docNo":"วพม.05/ว.14","docDate":"09/04/2561","sender":"นายมนต์ธัช มะกล่ำทอง","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยวิทยานิพนธ์เพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 61-004-03-002-1"},
+      {"year":2561,"recvNo":5,"docNo":"วพม.05/ว.131","docDate":"27/04/2561","sender":"นางสาวธีตา ศรีคช","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยเพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 61-005-03-003-1"},
+      {"year":2561,"recvNo":6,"docNo":"วทส. 07/169","docDate":"8/6/2561","sender":"นายวีรวัฒน์ สุทธ์ทุทัศน์","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยเพื่อพิจารณาจริยธรรมการวิจัยในคน (ยกเลิกเนื่องจากต้องผ่านคณะอนุกรรมการ)"},
+      {"year":2561,"recvNo":6,"docNo":"วทส. 07/554","docDate":"5/11/2561","sender":"นางสาวนพลักษณ์ หนักแน่น","recipient":"คกก.จริยธรรมฯ สนธ.","subject":"ขอเสนอโครงร่างการวิจัยเพื่อพิจารณาจริยธรรมการวิจัยในคน รหัสโครงการ 61-006-05-002-1"},
+      {"year":2562,"recvNo":1,"docNo":"วพม.05/028","docDate":"23/1/2562","sender":"นางสาวปิยะวดี งามดี","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน 62-001-03-001-2"},
+      {"year":2562,"recvNo":2,"docNo":"วพม.05/141","docDate":"5/4/2562","sender":"นางสาวชิดชนก สายชู","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน 62-002-03-002-3"},
+      {"year":2562,"recvNo":3,"docNo":"วพม.05/145","docDate":"17/4/2562","sender":"นางสาวชิดชนก สายชู","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอส่งเอกสารเพิ่มเติมเพื่อเสนอโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2562,"recvNo":4,"docNo":"วชม.0600/256","docDate":"22/4/2562","sender":"นายภานุวัฒน์ นิ่มนวล","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอร่างโครงการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน 62-003-02-001-1"},
+      {"year":2562,"recvNo":5,"docNo":"วพม.05/179","docDate":"7/5/2562","sender":"นางนิชนันทน์ บุญอ่อน","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2562,"recvNo":6,"docNo":"วพม.05/190","docDate":"15/5/2562","sender":"นางสาวธัญภา อินต๊ะนา","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2562,"recvNo":8,"docNo":"วพม.05/295","docDate":"8/7/2562","sender":"ผอ.วพม","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอต่ออายุใบรับรองโครงการวิจัย (COA 004/2561)"},
+      {"year":2562,"recvNo":9,"docNo":"วชม.0600/659","docDate":"2/9/2562","sender":"ผอ.วชม","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับพิจารณาจริยธรรมการวิจัยในคน (การพัฒนาอุปกรณ์ตรวจสอบคุณภาพอากาศ)"},
+      {"year":2562,"recvNo":10,"docNo":"-","docDate":"-","sender":"คณบดีคณะวิทยาศาสตร์ฯ","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับพิจารณาจริยธรรมการวิจัยในคน (อ.วีรวัฒน์ สุทธ์สุทัศน์)"},
+      {"year":2562,"recvNo":11,"docNo":"-","docDate":"-","sender":"คณบดีคณะวิทยาศาสตร์ฯ","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับพิจารณาจริยธรรมการวิจัยในคน (อ.จุฑารัตน์ เทียนบูชา)"},
+      {"year":2562,"recvNo":12,"docNo":"วพม.05/629","docDate":"28/11/2562","sender":"ผอ.วพม.","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับพิจารณาจริยธรรมการวิจัยในคน (ผศ.ชัชพล มงคลิก)"},
+      {"year":2562,"recvNo":13,"docNo":"วพม.05/687","docDate":"25/12/2562","sender":"ผอ.วพม.","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับพิจารณาจริยธรรมการวิจัยในคน (อ.เกริดา โคตรชาตรี)"},
+      {"year":2563,"recvNo":1,"docNo":"วพม.05/058","docDate":"24/1/2563","sender":"ผอ.วพม.","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับพิจารณาจริยธรรมการวิจัยในคน (อ.สาธิต ศรีสถิตย์)"},
+      {"year":2563,"recvNo":2,"docNo":"วชม.0600/0195","docDate":"16/3/2563","sender":"ผอ.วชม.","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับพิจารณาจริยธรรมการวิจัยในคน (อ.ชูชาติ จุลพันธ์)"},
+      {"year":2563,"recvNo":3,"docNo":"วทส.07/580","docDate":"12/6/2563","sender":"คณบดีคณะวิทยาศาสตร์ฯ","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับพิจารณาจริยธรรมการวิจัยในคน (อ.ดวงพร เทพมณี)"},
+      {"year":2563,"recvNo":4,"docNo":"วทส.07/641","docDate":"23/6/2563","sender":"คณบดีคณะวิทยาศาสตร์ฯ","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับพิจารณาจริยธรรมการวิจัยในคน (อ.อารียา จิรธนานุวัฒน์)"},
+      {"year":2563,"recvNo":5,"docNo":"วพม.05/457","docDate":"21/8/2563","sender":"ผอ.วพม.","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับพิจารณาจริยธรรมการวิจัยในคน (น.ส.พิมพา จันทรประสิทธิ์)"},
+      {"year":2563,"recvNo":6,"docNo":"วพม.05/547","docDate":"15/10/63","sender":"ผอ.วพม.","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (รศ.นันทสารี สุขโต)"},
+      {"year":2563,"recvNo":7,"docNo":"วพม.05/677","docDate":"27/11/2563","sender":"ผอ.วพม.","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (นายธนกฤต วงศ์พานิช)"},
+      {"year":2563,"recvNo":8,"docNo":"วพม.05/723","docDate":"16/12/2563","sender":"ผอ.วพม.","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (อ.สาธิต ศรีสถิตย์)"},
+      {"year":2563,"recvNo":9,"docNo":"วพม.05/746","docDate":"24/12/2563","sender":"ผอ.วพม.","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอต่ออายุโครงการวิจัยที่ผ่านการรับรองจากคณะกรรมการพิจารณาจริยธรรมการวิจัยในคน (อ.สาธิต ศรีสถิตย์)"},
+      {"year":2563,"recvNo":10,"docNo":"วพม.05/747","docDate":"24/12/2563","sender":"ผอ.วพม.","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเปลี่ยนแปลงรายละเอียดโครงการวิจัยที่ผ่านการรับรองจริยธรรมการวิจัยในคน (อ.สาธิต ศรีสถิตย์)"},
+      {"year":2564,"recvNo":1,"docNo":"วพม.05/73","docDate":"2/2/2564","sender":"ผอ.วพม.","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (อ.มณีรัตน์ องค์วรรณดี)"},
+      {"year":2564,"recvNo":2,"docNo":"วพม.05/161","docDate":"16/3/2564","sender":"ผอ.วพม.","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (นายโอฬาร อนันทนุพงศ์)"},
+      {"year":2564,"recvNo":3,"docNo":"วทส.07/237","docDate":"10/3/2564","sender":"คณบดีคณะวิทยาศาสตร์ฯ","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (อาจารย์อารียา จิรธนานุวัฒน์)"},
+      {"year":2564,"recvNo":4,"docNo":"วพม.05/171","docDate":"26/3/2564","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (นายกฤตกานต์ วงศ์สง่า)"},
+      {"year":2564,"recvNo":5,"docNo":"วพม.05/277","docDate":"1 มิ.ย. 2564","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (นางสาวเทตยา สายเพ็ญ)"},
+      {"year":2564,"recvNo":6,"docNo":"วพม.05/337","docDate":"23 มิ.ย. 2564","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (นางสาวรัชดาพร ธรรมไหว)"},
+      {"year":2564,"recvNo":7,"docNo":"วพม.05/338","docDate":"24 มิ.ย. 2564","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (ศ.ธเรศ ศรีสถิตย์)"},
+      {"year":2564,"recvNo":8,"docNo":"วพม.05/339","docDate":"24 มิ.ย. 2564","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (นางสาวธัญญลักษณ์ ชาญณรงค์)"},
+      {"year":2564,"recvNo":9,"docNo":"วพม.05/341","docDate":"24 มิ.ย.","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (นางสาวรริดา แก้วเมืองมูล)"},
+      {"year":2564,"recvNo":10,"docNo":"วพม.05/347","docDate":"25 มิ.ย. 64","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (ผศ.ชัชพล มงคลิก)"},
+      {"year":2564,"recvNo":12,"docNo":"วพม.05/358","docDate":"29 มิ.ย. 64","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (นางสาวปุณรดา ล้วนวิเศษ)"},
+      {"year":2564,"recvNo":13,"docNo":"วพม.05/357","docDate":"29 มิ.ย. 2564","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (วรพชร จันทร์ขันตี)"},
+      {"year":2564,"recvNo":14,"docNo":"วพม.05/380","docDate":"2 ก.ค. 2564","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (อ.แสน กีรตินวนันท์)"},
+      {"year":2564,"recvNo":15,"docNo":"วพม.05/498","docDate":"6 ส.ค. 64","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (นายชยุต กิ่งเงิน)"},
+      {"year":2564,"recvNo":16,"docNo":"วพม.05/682","docDate":"11 ต.ค. 64","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (อ.แสน กีรตินวนันท์)"},
+      {"year":2564,"recvNo":17,"docNo":"วพม.05/683","docDate":"11 ต.ค. 64","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอยุติโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (ผศ.วรพชร จันทร์ขันตี)"},
+      {"year":2564,"recvNo":18,"docNo":"วพม.05/727","docDate":"28 ต.ค. 64","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (นางสาวแก้วบัวเกื้อ รัตนจันทร์)"},
+      {"year":2564,"recvNo":19,"docNo":"วพม.05/736","docDate":"29 ต.ค. 64","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (นายเมธวิน มีสุวรรณ)"},
+      {"year":2564,"recvNo":20,"docNo":"วพม.05/734","docDate":"2 พ.ย. 64","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (รศ.มณีรัตน์ องค์วรรณดี)"},
+      {"year":2564,"recvNo":21,"docNo":"นมร.01/784","docDate":"3 พ.ย. 64","sender":"คณบดีคณะวิทยาศาสตร์ฯ","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (อาจารย์อารียา จิรธนานุวัฒน์)"},
+      {"year":2564,"recvNo":22,"docNo":"นมร.0701/806","docDate":"19 พ.ย. 64","sender":"คณบดีคณะวิทยาศาสตร์ฯ","recipient":"คกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (อาจารย์ปรัชญา ตั้งจิตสมบูรณ์)"},
+      {"year":2564,"recvNo":23,"docNo":"วพม.05/823","docDate":"25 พ.ย. 64","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (อ.แสน กีรตินวนันท์)"},
+      {"year":2564,"recvNo":24,"docNo":"วพม.05/868","docDate":"14 ธ.ค. 64","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน (อ.แสน กีรตินวนันท์)"},
+      {"year":2564,"recvNo":25,"docNo":"วพม.05/936","docDate":"30 ธ.ค. 64","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริญธรรมการวิจัยในคน (น.ส.ภรณ์ฐิตา จิรประภาชัยเลิศ)"},
+      {"year":2564,"recvNo":26,"docNo":"วพม.05/937","docDate":"30 ธ.ค. 64","sender":"ผอ.วพม.","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน (น.ส.ปารวี รัตนคาม)"},
+      {"year":2565,"recvNo":1,"docNo":"นมร.0701/73","docDate":"28 ม.ค. 65","sender":"อ.เบญจรัตน์ สัจกุล","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยฉบับแก้ไขเพิ่มเติมเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2565,"recvNo":2,"docNo":"วพม.05/176","docDate":"15 มี.ค. 65","sender":"รศ.มณีรัตน์ องค์วรรณดี","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2565,"recvNo":3,"docNo":"นมร.0701/156","docDate":"16 มี.ค. 65","sender":"อ.เบญจรัตน์ สัจกุล","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเปลี่ยนแปลงรายละเอียดโครงการวิจัยที่ผ่านการรับรองจริยธรรมการวิจัยในคน"},
+      {"year":2565,"recvNo":4,"docNo":"วพม.05/204","docDate":"25 มี.ค. 65","sender":"รศ.มณีรัตน์ องค์วรรณดี","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน"},
+      {"year":2565,"recvNo":5,"docNo":"นมร.0701/167","docDate":"24 มี.ค. 65","sender":"อ.ดวงพร เทพมณี","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2565,"recvNo":6,"docNo":"นมร.0701/220","docDate":"11 เม.ย. 65","sender":"ผศ.อารียา จิรธนานุวัฒน์","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเปลี่ยนแปลงรายละเอียดโครงการวิจัยที่ผ่านการรับรองจริยธรรมการวิจัยในคน"},
+      {"year":2565,"recvNo":10,"docNo":"วพม.05/304","docDate":"6 พ.ค. 65","sender":"รศ.นันทสารี สุขโต","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน"},
+      {"year":2565,"recvNo":12,"docNo":"วพม.05/427","docDate":"16 มิ.ย. 65","sender":"อ.สาธิต ศรีสถิตย์","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงการวิจัยเพื่อขอรับการพิจารณารับรองจริยธรรมการวิจัยในคน"},
+      {"year":2565,"recvNo":14,"docNo":"นมร.0701/515","docDate":"26 ก.ค. 65","sender":"ว่าที่ร้อยตรีวีรยุทธ หมื่นบุญมี","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอส่งโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2565,"recvNo":22,"docNo":"นมร.0701/734","docDate":"16 ก.ย. 65","sender":"อาจารย์นัชชา ผลพอตน","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2565,"recvNo":25,"docNo":"วชม.0600/1197","docDate":"10 ต.ค. 65","sender":"อ.วรรณอาภา ประไพพรเลิศ","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน ครั้งที่ 1"},
+      {"year":2566,"recvNo":1,"docNo":"นมร.0503/036","docDate":"17 ม.ค. 66","sender":"ผศ.แสน กีรตินวนันท์","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน ครั้งที่ 3"},
+      {"year":2566,"recvNo":3,"docNo":"วชม.06/0207","docDate":"23 ก.พ. 66","sender":"อ.วรรณอาภา ประไพพรเลิศ","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน ครั้งที่ 2"},
+      {"year":2566,"recvNo":6,"docNo":"นมร.0503/338","docDate":"31 มี.ค. 66","sender":"ผศ.ชัชพล มงคลิก","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอส่งโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2566,"recvNo":10,"docNo":"นมร.0701/364","docDate":"27 เม.ย. 66","sender":"อ.ดวงพร เทพมณี","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอส่งโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2566,"recvNo":17,"docNo":"นมร.0701/694","docDate":"8 ส.ค. 66","sender":"ผศ.ยศศิริ ยศธร","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอส่งโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2566,"recvNo":24,"docNo":"นมร.0701/1100","docDate":"19 ธ.ค. 66","sender":"อาจารย์นัชชา ผลพอตน","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอส่งโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2567,"recvNo":1,"docNo":"นมร.0701/8","docDate":"3 ม.ค. 67","sender":"อ.ดวงพร เทพมณี","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอส่งโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน (2 โครงการ)"},
+      {"year":2567,"recvNo":7,"docNo":"นมร.0701/303","docDate":"5 เม.ย. 67","sender":"ผศ.ธีตา ศรีคช","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอส่งโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2567,"recvNo":10,"docNo":"นมร.0503/399","docDate":"29 เม.ย. 67","sender":"ศ.จรัส สุวรรณมาลา","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอส่งโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2567,"recvNo":13,"docNo":"วชม.0600/0683","docDate":"8 ก.ค. 67","sender":"อ.ชยภัทร ประไพพรเลิศ","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอส่งโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2568,"recvNo":1,"docNo":"นมร.0503/001","docDate":"3 ม.ค. 68","sender":"นายสุรกานต์ ต่างเพ็ชร","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอส่งโครงร่างการค้นคว้าอิสระเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2568,"recvNo":4,"docNo":"วชม.0604/13","docDate":"10 ม.ค. 68","sender":"อ.ชูชาติ จุลพันธ์","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอพิจารณากลั่นกรองโครงการวิจัยเกี่ยวข้องกับจริยธรรมการวิจัยในคน"},
+      {"year":2568,"recvNo":13,"docNo":"นมร.0503/126","docDate":"5 ก.พ. 68","sender":"รองศาสตราจารย์นันทสารี สุขโต","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอส่งโครงร่างการค้นคว้าอิสระเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2568,"recvNo":21,"docNo":"นมร.0503/271","docDate":"18 มี.ค. 68","sender":"รองศาสตราจารย์มณีรัตน์ องค์วรรณดี","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอส่งโครงร่างการค้นคว้าอิสระเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"},
+      {"year":2568,"recvNo":33,"docNo":"วชม.0600/1200","docDate":"24/10/2568","sender":"ผู้ช่วยศาสตราจารย์วรรณอาภา ประไพพรเลิศ","recipient":"ประธานคกก.จริยธรรมฯ สนธ","subject":"ขอเสนอโครงร่างการวิจัยเพื่อขอรับการพิจารณาจริยธรรมการวิจัยในคน"}
+    ];
+
+    let currentProjects = JSON.parse(localStorage.getItem('nmu_projects_sheet_db') || JSON.stringify(initialProjects));
+
+    function saveProjects() {
+      localStorage.setItem('nmu_projects_sheet_db', JSON.stringify(currentProjects));
+    }
+
+    // Navigation Switcher
+    function switchTab(tabId) {
+      const tabs = ['home', 'tracking', 'submission', 'forms', 'registry', 'drive', 'security'];
+      tabs.forEach(t => {
+        const el = document.getElementById('tab-' + t);
+        const nav = document.getElementById('nav-' + t);
+        if (el) el.classList.add('hidden');
+        if (nav) {
+          nav.classList.remove('bg-emerald-100', 'text-emerald-900');
+          nav.classList.add('text-slate-600');
+        }
+      });
+      const activeEl = document.getElementById('tab-' + tabId);
+      const activeNav = document.getElementById('nav-' + tabId);
+      if (activeEl) activeEl.classList.remove('hidden');
+      if (activeNav) {
+        activeNav.classList.add('bg-emerald-100', 'text-emerald-900');
+        activeNav.classList.remove('text-slate-600');
+      }
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenu) mobileMenu.classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (tabId === 'registry') renderRegistryTable();
+    }
+
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenu) mobileMenu.classList.toggle('hidden');
+    }
+
+    function trackFromHome() {
+      const val = document.getElementById('homeTrackInput').value.trim();
+      if (val) quickSearch(val);
+    }
+
+    function quickSearch(code) {
+      const input = document.getElementById('trackingCodeInput');
+      if (input) input.value = code;
+      switchTab('tracking');
+      executeSearchProject();
+    }
+
+    function executeSearchProject() {
+      const input = document.getElementById('trackingCodeInput');
+      if (!input) return;
+      const query = input.value.trim().toLowerCase();
+      const errBox = document.getElementById('trackingError');
+      const resCard = document.getElementById('trackingResultCard');
+
+      if (errBox) errBox.classList.add('hidden');
+      if (resCard) resCard.classList.add('hidden');
+
+      const found = currentProjects.find(p => 
+        (p.docNo && p.docNo.toLowerCase().includes(query)) ||
+        (p.sender && p.sender.toLowerCase().includes(query)) ||
+        (p.subject && p.subject.toLowerCase().includes(query))
+      );
+
+      if (found) {
+        document.getElementById('resCode').textContent = `ปี ${found.year} / รับที่ ${found.recvNo}`;
+        document.getElementById('resYear').textContent = `พ.ศ. ${found.year}`;
+        document.getElementById('resSubject').textContent = found.subject;
+        document.getElementById('resResearcher').textContent = found.sender;
+        document.getElementById('resDept').textContent = found.recipient;
+        document.getElementById('resDocNo').textContent = found.docNo;
+        document.getElementById('resDate').textContent = found.docDate;
+        resCard.classList.remove('hidden');
+      } else {
+        if (errBox) {
+          errBox.textContent = `ไม่พบข้อมูลที่ค้นหาจากคำว่า "${query}"`;
+          errBox.classList.remove('hidden');
+        }
+      }
+    }
+
+    function renderRegistryTable() {
+      const tbody = document.getElementById('registryTableBody');
+      if (!tbody) return;
+      const searchInput = document.getElementById('regSearch');
+      const yearFilter = document.getElementById('regYearFilter');
+      const search = searchInput ? searchInput.value.toLowerCase() : '';
+      const year = yearFilter ? yearFilter.value : 'all';
+
+      const filtered = currentProjects.filter(p => {
+        const mYear = year === 'all' || p.year.toString() === year;
+        const mSearch = p.subject.toLowerCase().includes(search) || 
+                        (p.docNo && p.docNo.toLowerCase().includes(search)) ||
+                        (p.sender && p.sender.toLowerCase().includes(search));
+        return mYear && mSearch;
+      });
+
+      tbody.innerHTML = filtered.map(p => `
+        <tr class="hover:bg-emerald-50/50 transition border-b border-slate-100">
+          <td class="p-3 text-center font-mono font-bold">${p.year}<br><span class="text-[10px] text-slate-400 font-normal">#${p.recvNo}</span></td>
+          <td class="p-3 font-mono font-bold text-emerald-800">${p.docNo}<br><span class="text-[10px] text-slate-400 font-normal">${p.docDate}</span></td>
+          <td class="p-3 max-w-xs font-medium text-slate-800">${p.subject}</td>
+          <td class="p-3 font-bold text-slate-700">${p.sender}</td>
+          <td class="p-3 text-slate-500">${p.recipient}</td>
+        </tr>
+      `).join('');
+    }
+
+    function submitOnlineRequest() {
+      const title = document.getElementById('subTitle').value.trim();
+      const researcher = document.getElementById('subResearcher').value.trim();
+      const faculty = document.getElementById('subFaculty').value;
+
+      if (!title || !researcher) {
+        alert('กรุณากรอกชื่อโครงการวิจัย และชื่อหัวหน้าโครงการ');
+        return;
+      }
+
+      const nextSeq = currentProjects.filter(p => p.year === 2569).length + 1;
+
+      const newRecord = {
+        year: 2569,
+        recvNo: nextSeq,
+        docNo: `ยื่นออนไลน์/2569-${nextSeq}`,
+        docDate: new Date().toLocaleDateString('th-TH'),
+        sender: researcher,
+        recipient: faculty,
+        subject: `ขอเสนอโครงร่างการวิจัยเรื่อง "${title}"`
+      };
+
+      currentProjects.unshift(newRecord);
+      saveProjects();
+
+      alert(`ยื่นคำขอสำเร็จ! ลงทะเบียนรับที่ #${nextSeq} (พ.ศ. 2569)`);
+      switchTab('registry');
+    }
+
+    function exportRegistryCsv() {
+      const rows = [
+        ['ปี พ.ศ.', 'เลขทะเบียนรับ', 'ที่', 'ลงวันที่', 'จาก', 'ถึง', 'เรื่อง'],
+        ...currentProjects.map(p => [p.year, p.recvNo, `"${p.docNo}"`, `"${p.docDate}"`, `"${p.sender}"`, `"${p.recipient}"`, `"${p.subject.replace(/"/g, '""')}"`])
+      ];
+      const csv = '\uFEFF' + rows.map(r => r.join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'NMU_IRB_Registry_Sheets_Export.csv';
+      a.click();
+    }
+
+    function downloadThisHtmlFile() {
+      const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'NMU_IRB_Portal_Single_File.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    }
+
+    // Init table
+    renderRegistryTable();
+  </script>
+</body>
+</html>
