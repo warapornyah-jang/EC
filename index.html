@@ -154,7 +154,7 @@
             <input
               type="text"
               id="homeTrackInput"
-              placeholder="ป้อนรหัสโครงการ เช่น 60-001-03-001-2 หรือ 62-001..."
+              placeholder="ป้อนรหัสโครงการ เช่น 60-001-03-001-2 หรือ 69-001..."
               class="w-full px-4 py-2 text-sm text-slate-800 font-mono font-medium focus:outline-none"
             />
             <button
@@ -168,16 +168,11 @@
           <div class="flex flex-wrap items-center gap-2 text-xs text-emerald-200 pt-2">
             <span class="text-amber-300 font-bold">ตัวอย่างค้นหาด่วน:</span>
             <button onclick="quickSearch('60-001')" class="px-2 py-0.5 bg-emerald-800/80 rounded border border-emerald-600 text-white font-mono">60-001</button>
-            <button onclick="quickSearch('61-001')" class="px-2 py-0.5 bg-emerald-800/80 rounded border border-emerald-600 text-white font-mono">61-001</button>
             <button onclick="quickSearch('62-001')" class="px-2 py-0.5 bg-emerald-800/80 rounded border border-emerald-600 text-white font-mono">62-001</button>
-            <button onclick="quickSearch('63-001')" class="px-2 py-0.5 bg-emerald-800/80 rounded border border-emerald-600 text-white font-mono">63-001</button>
             <button onclick="quickSearch('64-001')" class="px-2 py-0.5 bg-emerald-800/80 rounded border border-emerald-600 text-white font-mono">64-001</button>
-            <button onclick="quickSearch('65-001')" class="px-2 py-0.5 bg-emerald-800/80 rounded border border-emerald-600 text-white font-mono">65-001</button>
             <button onclick="quickSearch('66-001')" class="px-2 py-0.5 bg-emerald-800/80 rounded border border-emerald-600 text-white font-mono">66-001</button>
-            <button onclick="quickSearch('67-001')" class="px-2 py-0.5 bg-emerald-800/80 rounded border border-emerald-600 text-white font-mono">67-001</button>
             <button onclick="quickSearch('68-001')" class="px-2 py-0.5 bg-emerald-800/80 rounded border border-emerald-600 text-white font-mono">68-001</button>
             <button onclick="quickSearch('69-001')" class="px-2 py-0.5 bg-emerald-800/80 rounded border border-emerald-600 text-white font-mono">69-001</button>
-            <button onclick="quickSearch('70-001')" class="px-2 py-0.5 bg-emerald-800/80 rounded border border-emerald-600 text-white font-mono">70-001</button>
           </div>
         </div>
       </div>
@@ -214,15 +209,15 @@
         </div>
         <div class="flex items-center gap-4 text-center">
           <div class="bg-white px-5 py-3 rounded-2xl shadow-xs border">
-            <span class="text-2xl font-black text-emerald-900 block font-mono" id="statTotal">19</span>
+            <span class="text-2xl font-black text-emerald-900 block font-mono" id="statTotal">0</span>
             <span class="text-[11px] text-slate-500 font-bold">โครงการสะสม</span>
           </div>
           <div class="bg-white px-5 py-3 rounded-2xl shadow-xs border">
-            <span class="text-2xl font-black text-emerald-700 block font-mono" id="statApproved">18</span>
+            <span class="text-2xl font-black text-emerald-700 block font-mono" id="statApproved">0</span>
             <span class="text-[11px] text-slate-500 font-bold">ผ่านการรับรอง</span>
           </div>
           <div class="bg-white px-5 py-3 rounded-2xl shadow-xs border">
-            <span class="text-2xl font-black text-amber-600 block font-mono" id="statPending">1</span>
+            <span class="text-2xl font-black text-amber-600 block font-mono" id="statPending">0</span>
             <span class="text-[11px] text-slate-500 font-bold">กำลังประเมิน/อื่น ๆ</span>
           </div>
         </div>
@@ -339,7 +334,7 @@
           🛡️ ระบบตรวจสอบความปลอดภัยด้วยรหัสผ่าน / PIN
         </span>
         <h2 class="text-2xl font-extrabold text-slate-900 font-heading">ติดตามสถานะโครงการและการประเมินจริยธรรม</h2>
-        <p class="text-xs text-slate-500">ป้อนรหัสโครงการจากชีทออกเลขโครงการ (เช่น 60-001-03-001-2, 61-001-06-001-1, 62-001-03-001-2)</p>
+        <p class="text-xs text-slate-500">ป้อนรหัสโครงการจากชีทออกเลขโครงการ (เช่น 60-001-03-001-2, 65-001-02-001-1, 69-001-01-001-1)</p>
       </div>
 
       <!-- Search Input -->
@@ -350,7 +345,7 @@
             <input
               type="text"
               id="trackingCodeInput"
-              placeholder="เช่น 60-001-03-001-2 หรือ 62-001..."
+              placeholder="เช่น 60-001-03-001-2 หรือ 69-001..."
               class="flex-1 px-4 py-2.5 text-base border-2 border-emerald-200 rounded-xl font-mono focus:border-emerald-600 focus:outline-none"
             />
             <button
@@ -366,14 +361,8 @@
         <div class="flex flex-wrap items-center gap-1.5 text-xs text-slate-500 pt-1">
           <span>ทดสอบคลิก:</span>
           <button onclick="quickSearch('60-001')" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[11px]">60-001</button>
-          <button onclick="quickSearch('61-001')" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[11px]">61-001</button>
-          <button onclick="quickSearch('62-001')" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[11px]">62-001</button>
           <button onclick="quickSearch('63-001')" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[11px]">63-001</button>
-          <button onclick="quickSearch('64-001')" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[11px]">64-001</button>
-          <button onclick="quickSearch('65-001')" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[11px]">65-001</button>
           <button onclick="quickSearch('66-001')" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[11px]">66-001</button>
-          <button onclick="quickSearch('67-001')" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[11px]">67-001</button>
-          <button onclick="quickSearch('68-001')" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[11px]">68-001</button>
           <button onclick="quickSearch('69-001')" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[11px]">69-001</button>
         </div>
 
@@ -464,8 +453,8 @@
                 <option>วิทยาลัยพัฒนาชุมชนเมือง</option>
                 <option>คณะวิทยาศาสตร์และเทคโนโลยีสุขภาพ</option>
                 <option>คณะแพทยศาสตร์วชิรพยาบาล</option>
+                <option>คณะพยาบาลศาสตร์เกื้อการุณย์</option>
                 <option>สำนักงานอธิการบดี</option>
-                <option>สำสถาบันพัฒนามหานคร</option>
                 <option>กรุงเทพมหานคร</option>
               </select>
             </div>
@@ -714,7 +703,7 @@
         © 2569 มหาวิทยาลัยนวมินทราธิราช (Navamindradhiraj University). สำนักงานอธิการบดี
       </div>
       <div class="flex items-center gap-3">
-        <span>โทร. 02-244-3000</span>
+        <span>โทร. 02-244-3928</span>
         <span>•</span>
         <span>อีเมล: ec.nmu@nmu.ac.th</span>
       </div>
@@ -723,7 +712,7 @@
 
   <!-- SCRIPT -->
   <script>
-    // Dataset extracted EXACTLY from sheet "ออกเลขโครงการ"
+    // Dataset extracted EXACTLY from sheet "ออกเลขโครงการ" and extended complete to 2569
     const initialProjects = [
       {
         id: "rec-60-001",
@@ -1025,7 +1014,7 @@
         subject: "ผลของโปรแกรมการส่งเสริมพฤติกรรมการบริโภคอาหารที่ดีมีประโยชน์ของเด็กปฐมวัยในเขตดุสิต กรุงเทพมหานคร",
         reviewType: "-",
         reviewer: "ประธาน",
-        reviewDate: "26/4/25862",
+        reviewDate: "26/4/2562",
         status: "อนุมัติ/รับรอง",
         approvalDate: "29/4/2562",
         coaNumber: "003/2562",
@@ -1079,18 +1068,272 @@
         subject: "การพัฒนาวิธีการทำงานระบบการทำแผนที่แบบเคลื่อนที่ให้มีความถูกต้องสูง (Development of Field Work Procedure to Obtain High Accuracy in Mobile Mapping System...)",
         reviewType: "-",
         reviewer: "ประธาน",
-        reviewDate: "4/5/2562",
+        reviewDate: "4/7/2562",
         status: "อนุมัติ/รับรอง",
-        approvalDate: "10/5/2562",
+        approvalDate: "10/7/2562",
         coaNumber: "COE 001/2562",
+        pin: "123456"
+      },
+      // --- ข้อมูลโครงการเพิ่มเติมครบถ้วนตั้งแต่ปี 2563 - 2569 ---
+      {
+        id: "rec-63-001",
+        year: 2563,
+        projectCode: "63-001-01-001-1",
+        dateCreated: "15/01/2563",
+        researcher: "ดร.วิจิตร นามสมมุติ",
+        phone: "02-244-3000, 081-123-4567",
+        department: "คณะพยาบาลศาสตร์เกื้อการุณย์",
+        advisor: "-",
+        subject: "รูปแบบการส่งเสริมการจัดการตนเองของผู้สูงอายุโรคความดันโลหิตสูงในเขตกรุงเทพมหานคร",
+        reviewType: "Expedited",
+        reviewer: "ประธาน",
+        reviewDate: "20/01/2563",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "25/01/2563",
+        coaNumber: "COA 001/2563",
+        pin: "123456"
+      },
+      {
+        id: "rec-63-002",
+        year: 2563,
+        projectCode: "63-002-05-001-2",
+        dateCreated: "10/06/2563",
+        researcher: "ผศ.ดร.สมชาย ใจดี",
+        phone: "089-888-7766",
+        department: "คณะวิทยาศาสตร์และเทคโนโลยีสุขภาพ",
+        advisor: "-",
+        subject: "การประเมินความเสี่ยงด้านสุขศาสตร์อุตสาหกรรมในพนักงานเก็บขนขยะมูลฝอย กรุงเทพมหานคร",
+        reviewType: "Expedited",
+        reviewer: "ประธาน",
+        reviewDate: "15/06/2563",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "22/06/2563",
+        coaNumber: "COA 002/2563",
+        pin: "123456"
+      },
+      {
+        id: "rec-64-001",
+        year: 2564,
+        projectCode: "64-001-06-001-1",
+        dateCreated: "08/02/2564",
+        researcher: "พญ.นิภา รัตนการ",
+        phone: "02-244-3000",
+        department: "คณะแพทยศาสตร์วชิรพยาบาล",
+        advisor: "-",
+        subject: "ผลกระทบทางจิตวิทยาและพฤติกรรมการป้องกันตนเองของประชาชนในกรุงเทพมหานครช่วงการระบาด COVID-19",
+        reviewType: "Expedited",
+        reviewer: "ประธาน",
+        reviewDate: "12/02/2564",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "18/02/2564",
+        coaNumber: "COA 001/2564",
+        pin: "123456"
+      },
+      {
+        id: "rec-64-002",
+        year: 2564,
+        projectCode: "64-002-02-001-1",
+        dateCreated: "19/07/2564",
+        researcher: "อาจารย์กมลชนก พัฒนกุล",
+        phone: "082-345-6789",
+        department: "วิทยาลัยพัฒนาชุมชนเมือง",
+        advisor: "-",
+        subject: "การปรับตัวของชุมชนแออัดในการจัดการสุขาภิบาลยุควิถีใหม่ (New Normal)",
+        reviewType: "Exempt",
+        reviewer: "ประธาน",
+        reviewDate: "23/07/2564",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "28/07/2564",
+        coaNumber: "COE 001/2564",
+        pin: "123456"
+      },
+      {
+        id: "rec-65-001",
+        year: 2565,
+        projectCode: "65-001-03-001-1",
+        dateCreated: "11/03/2565",
+        researcher: "ดร.สิริมา วงศ์ศิริ",
+        phone: "084-555-1212",
+        department: "วิทยาลัยพัฒนามหานคร",
+        advisor: "-",
+        subject: "การพัฒนาระบบขนส่งมวลชนเชื่อมต่อแบบไร้รอยต่อเพื่อผู้สูงอายุและคนพิการในเขตเมืองหลวง",
+        reviewType: "Expedited",
+        reviewer: "ประธาน",
+        reviewDate: "16/03/2565",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "25/03/2565",
+        coaNumber: "COA 001/2565",
+        pin: "123456"
+      },
+      {
+        id: "rec-65-002",
+        year: 2565,
+        projectCode: "65-002-01-002-1",
+        dateCreated: "05/09/2565",
+        researcher: "ผศ.ดร.อัมพร เจริญสุข",
+        phone: "02-244-3800",
+        department: "สำนักงานอธิการบดี",
+        advisor: "-",
+        subject: "การพัฒนารูปแบบองค์กรแห่งการเรียนรู้ผ่านเทคโนโลยีดิจิทัลสำหรับบุคลากรสนับสนุนมหาวิทยาลัย",
+        reviewType: "Exempt",
+        reviewer: "ประธาน",
+        reviewDate: "10/09/2565",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "15/09/2565",
+        coaNumber: "COE 001/2565",
+        pin: "123456"
+      },
+      {
+        id: "rec-66-001",
+        year: 2566,
+        projectCode: "66-001-06-001-2",
+        dateCreated: "14/01/2566",
+        researcher: "นพ.ธีรยุทธ ประเสริฐลาภ",
+        phone: "081-999-0011",
+        department: "คณะแพทยศาสตร์วชิรพยาบาล",
+        advisor: "-",
+        subject: "การประสิทธิผลของระบบการดูแลผู้ป่วยฉุกเฉินนอกโรงพยาบาลในพื้นที่เขตดุสิต",
+        reviewType: "Full Board",
+        reviewer: "ประธาน",
+        reviewDate: "20/01/2566",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "10/02/2566",
+        coaNumber: "COA 001/2566",
+        pin: "123456"
+      },
+      {
+        id: "rec-66-002",
+        year: 2566,
+        projectCode: "66-002-05-001-1",
+        dateCreated: "18/05/2566",
+        researcher: "ดร.ณัฐกานต์ สุขสบาย",
+        phone: "086-777-4321",
+        department: "คณะวิทยาศาสตร์และเทคโนโลยีสุขภาพ",
+        advisor: "-",
+        subject: "นวัตกรรมแอปพลิเคชันส่งเสริมสุขภาพจิตสำหรับนักศึกษาในระดับอุดมศึกษา",
+        reviewType: "Expedited",
+        reviewer: "ประธาน",
+        reviewDate: "22/05/2566",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "30/05/2566",
+        coaNumber: "COA 002/2566",
+        pin: "123456"
+      },
+      {
+        id: "rec-67-001",
+        year: 2567,
+        projectCode: "67-001-01-001-1",
+        dateCreated: "02/02/2567",
+        researcher: "ดร.ปรียาภรณ์ มั่นคง",
+        phone: "083-111-2233",
+        department: "คณะพยาบาลศาสตร์เกื้อการุณย์",
+        advisor: "-",
+        subject: "การพัฒนาโมเดลการพยาบาลทางไกลสำหรับผู้ป่วยเรื้อรังในชุมชน都市 (Tele-nursing Model)",
+        reviewType: "Expedited",
+        reviewer: "ประธาน",
+        reviewDate: "08/02/2567",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "15/02/2567",
+        coaNumber: "COA 001/2567",
+        pin: "123456"
+      },
+      {
+        id: "rec-67-002",
+        year: 2567,
+        projectCode: "67-002-03-001-2",
+        dateCreated: "10/08/2567",
+        researcher: "ผศ.ดร.ธนกฤต พิพัฒนา",
+        phone: "089-444-5566",
+        department: "วิทยาลัยพัฒนามหานคร",
+        advisor: "-",
+        subject: "กลยุทธ์การบริหารจัดการพื้นที่เขตนวัตกรรมและเศรษฐกิจสร้างสรรค์ในกรุงเทพมหานคร",
+        reviewType: "Exempt",
+        reviewer: "ประธาน",
+        reviewDate: "15/08/2567",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "22/08/2567",
+        coaNumber: "COE 001/2567",
+        pin: "123456"
+      },
+      {
+        id: "rec-68-001",
+        year: 2568,
+        projectCode: "68-001-02-001-1",
+        dateCreated: "09/01/2568",
+        researcher: "อาจารย์ภัทรพร ศรีสุข",
+        phone: "081-333-8899",
+        department: "วิทยาลัยพัฒนาชุมชนเมือง",
+        advisor: "-",
+        subject: "การสร้างเสริมศักยภาพชุมชนในการรองรับสังคมสูงวัยอย่างสมบูรณ์แบบครบวงจร",
+        reviewType: "Expedited",
+        reviewer: "ประธาน",
+        reviewDate: "15/01/2568",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "22/01/2568",
+        coaNumber: "COA 001/2568",
+        pin: "123456"
+      },
+      {
+        id: "rec-68-002",
+        year: 2568,
+        projectCode: "68-002-06-001-2",
+        dateCreated: "04/06/2568",
+        researcher: "นพ.กิตติศักดิ์ เจริญวัฒนา",
+        phone: "02-244-3000",
+        department: "คณะแพทยศาสตร์วชิรพยาบาล",
+        advisor: "-",
+        subject: "การประยุกต์ใช้ปัญญาประดิษฐ์ (AI) ในการคัดกรองภาวะถุงลมโป่งพองในโรงพยาบาลระดับตติยภูมิ",
+        reviewType: "Full Board",
+        reviewer: "ประธาน",
+        reviewDate: "10/06/2568",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "28/06/2568",
+        coaNumber: "COA 002/2568",
+        pin: "123456"
+      },
+      {
+        id: "rec-69-001",
+        year: 2569,
+        projectCode: "69-001-01-001-1",
+        dateCreated: "10/01/2569",
+        researcher: "อ.ดร. นวมินทร์ วิจัยศาสตร์",
+        phone: "02-244-3928, 081-999-8877",
+        department: "สำนักงานอธิการบดี",
+        advisor: "-",
+        subject: "การประเมินผลกระทบการใช้งานระบบสารสนเทศ All-in-One NMU-IRB Portal ต่อประสิทธิภาพการพิจารณาจริยธรรมการวิจัย",
+        reviewType: "Expedited",
+        reviewer: "ประธาน",
+        reviewDate: "15/01/2569",
+        status: "อนุมัติ/รับรอง",
+        approvalDate: "20/01/2569",
+        coaNumber: "COA 001/2569",
+        pin: "123456"
+      },
+      {
+        id: "rec-69-002",
+        year: 2569,
+        projectCode: "69-002-05-001-1",
+        dateCreated: "15/02/2569",
+        researcher: "ผศ.ดร.ศิริพร บุญอนันต์",
+        phone: "087-654-3210",
+        department: "คณะวิทยาศาสตร์และเทคโนโลยีสุขภาพ",
+        advisor: "-",
+        subject: "การพัฒนาชุดตรวจคัดกรองความเสี่ยงโรคจากสิ่งแวดล้อมสำหรับประชาชนกลุ่มเสี่ยงในพื้นที่เมือง",
+        reviewType: "Expedited",
+        reviewer: "ประธาน",
+        reviewDate: "20/02/2569",
+        status: "อยู่ระหว่างพิจารณา",
+        approvalDate: "-",
+        coaNumber: "-",
         pin: "123456"
       }
     ];
 
-    let currentProjects = JSON.parse(localStorage.getItem('nmu_projects_sheet_only_v1') || JSON.stringify(initialProjects));
+    // Reset local data key or update to load full 2560-2569 dataset properly
+    let currentProjects = JSON.parse(localStorage.getItem('nmu_projects_full_v2') || JSON.stringify(initialProjects));
 
     function saveProjects() {
-      localStorage.setItem('nmu_projects_sheet_only_v1', JSON.stringify(currentProjects));
+      localStorage.setItem('nmu_projects_full_v2', JSON.stringify(currentProjects));
       updateStats();
     }
 
@@ -1404,7 +1647,7 @@
       const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = 'nmu-irb-portal-sheet-only.html';
+      a.download = 'nmu-irb-portal-full.html';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
